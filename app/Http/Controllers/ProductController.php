@@ -50,7 +50,7 @@ class ProductController extends Controller
                 $product->description = $req->des;
                 $product->parameter = $req->parameter;
                 $product->origin = $req->origin;
-                $product->guarantee = $req->guarantee;
+            //    $product->guarantee = $req->guarantee;
                 $product->unit_price = $req->unit_price;
                 $product->promotion_price = $req->promotion_price;
                 $product->image = $req->img;
@@ -98,7 +98,7 @@ class ProductController extends Controller
         $product->description = $req->des;
         $product->parameter = $req->parameter;
         $product->origin = $req->origin;
-        $product->guarantee = $req->guarantee;
+     //  $product->guarantee = $req->guarantee;
         $product->unit_price = $req->unit_price;
         $product->promotion_price = $req->promotion_price;
         $product->image = $req->img;

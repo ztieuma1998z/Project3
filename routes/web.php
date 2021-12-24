@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('index',[
+Route::get('home',[
 	'as'=>'trang-chu',
 	'uses'=>'PageController@getIndex'
 ]);
@@ -29,7 +30,6 @@ Route::get('danh-muc-san-pham/{type}',[
 	'as'=>'danhmucsp',
 	'uses'=>'PageController@getDanhmucSp'
 ]);
-
 Route::get('danh-muc-san-pham-hang/{type}',[
 	'as'=>'danhmucsphang',
 	'uses'=>'PageController@getDanhmucSpHang'

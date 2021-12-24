@@ -1,9 +1,9 @@
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+      <b>Version</b> 1.1.0
     </div>
-    <strong>Copyright &copy; 2018-2019 <a href="https://adminlte.io">Do Van Tuyen</a>.</strong> All rights
+    <strong>Kì Học &copy; 2021-2022 <a href="https://adminlte.io">Nhóm Project3-ĐHBKHN</a>.</strong> All rights
     reserved.
   </footer>
 
