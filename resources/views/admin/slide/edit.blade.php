@@ -1,53 +1,77 @@
-@extends('admin.layout.index')
+@extends('Admin.layout.master')
 @section('content')
-	   <section class="content-header">
-      <h1>
-        Sửa
-        <small>{{$slide->name}}</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Slide</a></li>
-        <li class="active">Edit</li>
-      </ol>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Loại sản phẩm - Cập nhật</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Trang chủ</a></li>
+              <li class="breadcrumb-item active">Loại sản phẩm - Cập nhật</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
     </section>
-    <br>
-    <div class="box-body" style="width: 1500px;">
-	    	@if(count($errors)>0)
-	    		<div class="alert alert-danger">
-	    			@foreach($errors->all() as $err)
-	    				{{$err}}<br>
-	    			@endforeach
-	    		</div>
-	    	@endif
 
-	    	@if(session('thongbao'))
-	    		<div class="alert alert-success">
-	    			{{session('thongbao')}}
-	    		</div>
-	    	@endif
-            <form role="form" action="admin/slide/edit/{{$slide->id}}" method="post">
-            	<input type="hidden" name="_token" value="{{csrf_token()}}">
-              <div class="col-sm-7">
-                <div class="form-group">
-                  <label>Tên Slide</label>
-                  <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục" value="{{$slide->name}}">
-                </div>
-                 <div class="form-group">
-                  <label>Link</label>
-                  <input type="text" name="link" class="form-control" placeholder="Nhập link" value="{{$slide->link}}">
-                </div>
-                <div class="form-group">
-                  <label>ảnh slide</label>
-                  <p><img src="source/image/slide/{{$slide->image}}" width="100px" height="50px"></p>
-                  <input type="file" name="img">
-                </div>
-                <div class="form-group">
-                  <label>Mô Tả</label>
-                  <textarea id="editor1" class="form-control" name="des" rows="3" placeholder="Mô tả">{{$slide->description}}</textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Sửa</button>
-                 <button type="reset" class="btn btn-default">Làm Mới</button>
-               </div>
-     		</form>
-     </div>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-body">
+            <form action="" method="POST" class="col-md-10 mx-auto" enctype="multipart/form-data">
+                @if(!$errors->slideErrors->isEmpty())
+                  @foreach($errors->slideErrors->all() as $err)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      {{$err}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  @endforeach
+                @endif
+                @include('Admin.slide.form')
+            </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+ <!-- /.content-wrapper -->
+@endsection
+@section('javascript2')
+<script>
+  $(".btn_save_category").click(function(e)
+  {
+    e.preventDefault();
+    form = $(this).parent('form').get(0);
+    swal({
+            title: "Bạn có chắc chắn?",
+            text: "Bạn có chắc chắn muốn sửa Slide ID="+{{$slide->id}}+" không ?",
+            icon: "info",
+            buttons: ["Không",{
+              text: "OK",
+              value: true,
+              visible: true,
+              className: "bg-success",
+              closeModal: true,
+            }],
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Thành công","Hệ thống chuẩn bị sửa Slide mang ID ="+{{$slide->id}}+" !",'success').then(function() {
+                    form.submit();
+                });
+            }
+          });
+  });
+</script>
 @endsection

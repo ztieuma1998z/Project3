@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\Nofitication;
+use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','level'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -28,7 +31,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function comment(){
-        return $this->hasMany('App\Comment','id_user','id');
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+    public function FavoriteProduct()
+    {
+        return $this->belongsToMany(Product::class,'favorite_product','fp_user_id','fp_product_id');
+    }
+    public function Transaction()
+    {
+        return $this->hasMany(Transaction::class,'tr_user_id');
+    }
+    public function NofiticationReceive()
+    {
+        return $this->hasMany(Nofitication::class,'nof_receiver');
     }
 }

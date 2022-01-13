@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class LoginController extends CustomerController
 {
     /*
     |--------------------------------------------------------------------------
@@ -19,21 +22,25 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function getLogin()
     {
-        $this->middleware('guest')->except('logout');
+        return view('customer.auth.login');
+    }
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect()->route('get.login');
+    }
+    public function postLogin(Request $request)
+    {
+        $infologin = $request->only('email','password');
+        if(Auth::attempt($infologin))
+        {
+            return redirect()->route('home');
+        }
+        else
+        {
+            return redirect()->back()->with('errorlogin','Lỗi');
+        }
     }
 }
