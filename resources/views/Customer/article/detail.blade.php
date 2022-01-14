@@ -1,6 +1,7 @@
 @extends('customer.layout.master')\
 @section('content')
 <style>
+
     .article_content img{
         position: relative;
 		left: 50%;
