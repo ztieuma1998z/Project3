@@ -6,7 +6,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="{{route('home')}}">Trang chủ</a></li>
-                <li class="active">Liên hệ</li>
+                < class="active">Liên hệ</li>
             </ul>
         </div>
     </div>
