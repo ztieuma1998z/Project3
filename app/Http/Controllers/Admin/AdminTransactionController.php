@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Withdrawrequest;
 
 class AdminTransactionController extends Controller
 {
@@ -21,14 +22,14 @@ class AdminTransactionController extends Controller
         $data = [
             'transactions' => $transactions
         ];
-        return view('Admin.transaction.index',$data);
+        return view('admin.transaction.index',$data);
     }
     public function getOrderItem(Request $request,$id)
     {
         if($request->ajax())
         {
             $orders = Order::where('or_transaction_id',$id)->get();
-            $html  = view('Admin.transaction.orderItem',compact('orders'))->render();
+            $html  = view('admin.transaction.orderItem',compact('orders'))->render();
             return \response()->json($html);
         }
     }
@@ -88,7 +89,7 @@ class AdminTransactionController extends Controller
                         {
                             $request->session()->flash('stopDelete', 'Giao dịch này đã thành công hoặc có dữ liệu quan trọng không thể xóa !!!');
                         }
-                        return redirect()->route('Admin.transaction.index')->with('success','Đã hủy giao dịch thành công');
+                        return redirect()->route('admin.transaction.index')->with('success','Đã hủy giao dịch thành công');
                     break;
                 case 'send':
                         // find orders of customer in transaction    
@@ -121,7 +122,7 @@ class AdminTransactionController extends Controller
                             $transaction->tr_status= 1;
                             $transaction->save();
                         }
-                        return redirect()->route('Admin.transaction.index')->with('success','Đã gửi hàng thành công !');
+                        return redirect()->route('admin.transaction.index')->with('success','Đã gửi hàng thành công !');
             }
         }
     }
@@ -151,7 +152,7 @@ class AdminTransactionController extends Controller
                 );
             $transaction->save();
         }
-        return redirect()->route('Admin.transaction.index');
+        return redirect()->route('admin.transaction.index');
     }
     public function exportTransactionPdf($id)
     {
@@ -166,7 +167,7 @@ class AdminTransactionController extends Controller
             'year' => $year
         ];
         // return view('Admin.transaction.transactionPdf',$data);
-        $pdf = \PDF::loadView('Admin.transaction.transactionPdf', $data);
+        $pdf = \PDF::loadView('admin.transaction.transactionPdf', $data);
         return $pdf->download('DetailTransaction'.$transaction->User->name.'MGD'.$transaction->id.'.pdf');
     }
 }

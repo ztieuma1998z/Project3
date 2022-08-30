@@ -14,7 +14,7 @@ class AdminCommentController extends Controller
         $data = [
             'ratings' => $ratings
         ];
-        return view('Admin.comment.index',$data);
+        return view('admin.comment.index',$data);
     }
     public function action($action,$id){
         if($action){
@@ -26,7 +26,7 @@ class AdminCommentController extends Controller
                     $product->pro_number_of_reviewers -= 1;
                     $product->save();
                     $rating->delete();
-                    return redirect()->route('Admin.comment.index');
+                    return redirect()->route('admin.comment.index');
                     break;
             }
         }

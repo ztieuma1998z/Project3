@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function getLogin()
     {
-        return view('Admin.login.login');
+        return view('admin.login.login');
     }
     public function postLogin(Request $request)
     {
@@ -29,7 +29,7 @@ class AdminController extends Controller
     }
     public function getLogout(){
         Auth::logout();
-        return view('Admin.login.login');
+        return view('admin.login.login');
     }
     public function index(){
         // get 7 day formar Y-m-d
@@ -74,6 +74,6 @@ class AdminController extends Controller
             'number_users' => $number_users,
             'number_articles' => $number_articles
         ];
-        return view('Admin.dashbroad.index',$data);
+        return view('admin.dashbroad.index',$data);
     }
 }

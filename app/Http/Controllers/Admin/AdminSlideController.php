@@ -16,11 +16,11 @@ class AdminSlideController extends Controller
         $data =  [
             'slides' => $slides
         ];
-        return view('Admin.slide.index',$data);
+        return view('admin.slide.index',$data);
     }
     public function create()
     {
-        return view('Admin.slide.create');
+        return view('admin.slide.create');
     }
     public function store(Request $request)
     {
@@ -40,7 +40,7 @@ class AdminSlideController extends Controller
         }
         $this->insertOrUpdate($request);
         $request->session()->flash('create_slide_success', 'Đã thêm 1 Slide!');
-        return redirect()->route('Admin.slide.index');
+        return redirect()->route('admin.slide.index');
     }
     public function edit($id)
     {
@@ -48,7 +48,7 @@ class AdminSlideController extends Controller
         $data = [
             'slide' => $slide
         ];
-        return view('Admin.slide.edit',$data);
+        return view('admin.slide.edit',$data);
     }
     public function update(Request $request, $id)
     {
@@ -66,7 +66,7 @@ class AdminSlideController extends Controller
         }
         $this->insertOrUpdate($request,$id);
         $request->session()->flash('edit_slide_success', 'Đã sửa thành công slide id số '.$id.'!');
-        return redirect()->route('Admin.slide.index');
+        return redirect()->route('admin.slide.index');
     }
     public function insertOrUpdate(Request $request,$id='')
     {
@@ -107,6 +107,6 @@ class AdminSlideController extends Controller
                 dd("Lỗi r");
                 break;
         }
-        return redirect()->route('Admin.slide.index');
+        return redirect()->route('admin.slide.index');
     }
 }

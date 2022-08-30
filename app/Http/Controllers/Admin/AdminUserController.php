@@ -17,11 +17,11 @@ class AdminUserController extends Controller
         $data = [
             'users' => $user
         ];
-        return view('Admin.user.index', $data);
+        return view('admin.user.index', $data);
     }
     public function create()
     {
-        return view('Admin.user.create');
+        return view('admin.user.create');
     }
     public function store(Request $request)
     {
@@ -58,7 +58,7 @@ class AdminUserController extends Controller
         $data = [
             'user' => $user
         ];
-        return view('Admin.user.edit', $data);
+        return view('admin.user.edit', $data);
     }
     public function update(Request $request, $id)
     {

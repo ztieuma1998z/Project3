@@ -19,7 +19,7 @@ class AdminProductController extends Controller
         $data = [
             'products' => $products
         ];
-        return view('Admin.product.index',$data);
+        return view('admin.product.index',$data);
     }
     // return form create product
     public function create()
@@ -28,7 +28,7 @@ class AdminProductController extends Controller
         $data = [
             'categories' => $categories
         ];
-        return view('Admin.product.create',$data);
+        return view('admin.product.create',$data);
     }
     // save product and return index product
     public function store(Request $request)
@@ -68,7 +68,7 @@ class AdminProductController extends Controller
         }
         $this->insertOrUpdate($request);
         $request->session()->flash('create_product_success', 'Đã thêm 1 sản phẩm mới!');
-        return redirect()->route('Admin.product.index');
+        return redirect()->route('admin.product.index');
     }
     //get form edit product
     public function edit(Request $request,$id)
@@ -81,7 +81,7 @@ class AdminProductController extends Controller
             'categories' => $categories,
             'attribute_product' => $attribute_product
         ];
-        return view('Admin.product.edit',$data);
+        return view('admin.product.edit',$data);
     }
     // update product 
     public function update(Request $request,$id)
@@ -120,7 +120,7 @@ class AdminProductController extends Controller
         }
         $this->insertOrUpdate($request,$id);
         $request->session()->flash('edit_product_success', 'Đã sửa thành công sản phẩm mang ID số'.$id.'!');
-        return redirect()->route('Admin.product.index');
+        return redirect()->route('admin.product.index');
     }
     //insert or update
     public function insertOrUpdate($request,$id='')
@@ -255,7 +255,7 @@ class AdminProductController extends Controller
                 dd("Lỗi r");
                 break;
         }
-        return redirect()->route('Admin.product.index');
+        return redirect()->route('admin.product.index');
     }
     // ajax get attribute product follow category
     public function getAttribute(Request $request)
@@ -265,7 +265,7 @@ class AdminProductController extends Controller
         if($request->id==0)
         {
             //render html
-            $html = view('Admin.product.getattribute',compact('category'))->render();
+            $html = view('admin.product.getattribute',compact('category'))->render();
         }
         else
         {
@@ -276,7 +276,7 @@ class AdminProductController extends Controller
                 'category' => $category
             ];
             //render html
-            $html = view('Admin.product.getattribute',$data)->render();
+            $html = view('admin.product.getattribute',$data)->render();
         }
         return \response()->json($html);
         // return view('Admin.product.getattribute',compact('category'));

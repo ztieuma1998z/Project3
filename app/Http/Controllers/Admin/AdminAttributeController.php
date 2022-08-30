@@ -18,10 +18,10 @@ class AdminAttributeController extends Controller
         $data = [
             'attributes' => $attributes
         ];
-        return view('Admin.attribute.index',$data);
+        return view('admin.attribute.index',$data);
     }
     public function create(){
-        return view('Admin.attribute.create');
+        return view('admin.attribute.create');
     }
     public function store(Request $request){
         //check Input
@@ -57,13 +57,13 @@ class AdminAttributeController extends Controller
         }
         $this->insertOrUpdate($request);
         $request->session()->flash('create_attribute_success', 'Đã thêm 1 thuộc tính mới !');
-        return redirect()->route('Admin.attribute.index');
+        return redirect()->route('admin.attribute.index');
     }
     public function edit($id)
     {
         //find attribute
         $attribute = AppAttribute::find($id);
-        return view('Admin.attribute.edit',compact('attribute'));
+        return view('admin.attribute.edit',compact('attribute'));
     }
     public function update(Request $request,$id)
     {
@@ -99,7 +99,7 @@ class AdminAttributeController extends Controller
         }
         $this->insertOrUpdate($request,$id);
         $request->session()->flash('edit_attribute_success', 'Đã sửa thuộc tính ID='.$id.' !');
-        return redirect()->route('Admin.attribute.index');
+        return redirect()->route('admin.attribute.index');
     }
     public function insertOrUpdate($request,$id='')
     {
@@ -130,6 +130,6 @@ class AdminAttributeController extends Controller
                 dd("Lỗi rồi");
                 break;
         }
-        return redirect()->route('Admin.attribute.index');
+        return redirect()->route('admin.attribute.index');
     }
 }

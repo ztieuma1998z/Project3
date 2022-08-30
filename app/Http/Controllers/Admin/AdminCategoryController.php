@@ -21,7 +21,7 @@ class AdminCategoryController extends Controller
         $data = [
             'categories' => $categories
         ];
-        return view('Admin.category.index',$data);
+        return view('admin.category.index',$data);
     }
     public function create()
     {
@@ -31,7 +31,7 @@ class AdminCategoryController extends Controller
         $data = [
             'attributes' =>$attributes
         ];
-        return view('Admin.category.create',$data);
+        return view('admin.category.create',$data);
     }
     public function store(Request $request)
     {  
@@ -52,7 +52,7 @@ class AdminCategoryController extends Controller
        $this->insertOrUpdate($request);
         //return view index
         $request->session()->flash('create_category_success', 'Đã thêm 1 loại sản phẩm!');
-        return redirect()->route('Admin.category.index');
+        return redirect()->route('admin.category.index');
     }
     public function edit($id)
     {
@@ -77,7 +77,7 @@ class AdminCategoryController extends Controller
         
         ];
         
-        return view('Admin.category.edit',$data);
+        return view('admin.category.edit',$data);
     }
     public function update(Request $request,$id)
     {
@@ -95,7 +95,7 @@ class AdminCategoryController extends Controller
         }
         $this->insertOrUpdate($request,$id);
         $request->session()->flash('edit_category_success', 'Đã sửa thành công loại sản phẩm mang ID số'.$id.'!');
-        return redirect()->route('Admin.category.index');
+        return redirect()->route('admin.category.index');
     }
     public function insertOrUpdate($request,$id='')
     {
@@ -168,6 +168,6 @@ class AdminCategoryController extends Controller
                 dd('Lỗi !!');
                 break;
         }
-        return redirect()->route('Admin.category.index');
+        return redirect()->route('admin.category.index');
     }
 }
